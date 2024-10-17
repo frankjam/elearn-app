@@ -4,8 +4,8 @@ To run
  step 3:  ``` php artisan serve ```
 
  login with a user with approval rights 
- email: ``` test@test.com ```
- password: ``` password ```
+ email: ``` test@gmail.com ```
+ password: ``` 123456789 ```
 
 
 
