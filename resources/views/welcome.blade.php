@@ -54,8 +54,8 @@
         @foreach ($courses as $course)
         <tr>
             <td>{{ $course->name }}</td>
-            <td>{{ $course->status }}</td>
-            <td><a href="#">View Contents</a></td>
+            <td>{{ $course->status == 1 ? 'Active' : 'Inactive' }}</td>
+            <td><a href="{{ route('courses.show', $course->id) }}">View Contents</a></td>
         </tr>
         @endforeach
     </tbody>

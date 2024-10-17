@@ -20,12 +20,19 @@ class HomeController extends Controller
     public function index()
     {
 
+ // Check if the user has the 'student' role
+ if (auth()->user()->hasRole('student')) {
+    $courses = courses::where('status','1')->get();
+    
+    return view('welcome',compact('courses'));
 
-        $courses = courses::get();
-        $users = User::get();
-        $roles = Role::pluck('name', 'name')->all();
+ }else{
+    $courses = courses::get();
+    $users = User::get();   
+    $roles = Role::pluck('name', 'name')->all();
         
-        return view('welcome',compact('courses','users','roles'));
+    return view('welcome',compact('courses','users','roles'));
+ }
     }
 
   

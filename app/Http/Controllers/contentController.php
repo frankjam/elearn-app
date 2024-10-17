@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\content;
+use App\Models\courses;
 use Illuminate\Http\Request;
 
 /**
@@ -58,7 +59,14 @@ class contentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $course = courses::findOrFail($id);
+        if(!$course || $course->status == 0){
+            return view('courses.index');
+        }
+        
+        $contents = content::where('course_id',$id)->get();
+
+        return view('content.show',compact('contents'));
     }
 
     /**

@@ -66,7 +66,7 @@ class coursesController extends Controller
     {
         $contents = content::where("course_id",$id)->get();
 
-        return view('courses.show',compact('contents'));
+        return view('courses.show', compact('contents'));
     }
 
     /**
