@@ -48,7 +48,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         });
 
         Route::resource('courses', coursesController::class);
+        Route::get('/courses/{id}', [contentController::class, 'show'])->name('content.show');
+
         Route::resource('content', contentController::class);
+
 
         /**
          * Staff permissions groups category Routes

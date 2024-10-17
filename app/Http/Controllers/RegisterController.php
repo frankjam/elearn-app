@@ -59,10 +59,10 @@ class RegisterController extends Controller
             'email' => $request->input('email'),
             'password' => $hashedPassword,
         ]);
-       // $user->assignRole('student');
+        $user->assignRole('student');
 
 
         // Redirect to the 'login' page with a success message
-        return redirect()->route('auth.login')->with('message', "Account successfully registered. Proceed to login");
+        return redirect()->route('/login')->with('message', "Account successfully registered. Proceed to login");
     }
 }

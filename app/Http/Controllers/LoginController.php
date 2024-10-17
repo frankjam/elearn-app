@@ -72,6 +72,7 @@ class LoginController extends Controller
      
         JWTAuth::Invalidate();
        // session_destroy();
+       $request->session()->flush();
 
         return redirect('login');
     }
