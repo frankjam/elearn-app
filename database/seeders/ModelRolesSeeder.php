@@ -13,8 +13,13 @@ class ModelRolesSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('permissions')->insert([
-            "INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES (3, 'App\\Models\\User', 1);"
+
+        DB::table('model_has_roles')->insert([
+            [
+                'role_id' => 3,
+                'model_type' => "App\\Models\\User",
+                'model_id' => 1,
+            ]
         ]);
     }
 }
