@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('content', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->unsignedBigInteger('course_id');
             $table->timestamps();
         });
     }
