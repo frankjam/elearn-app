@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\content;
 use Illuminate\Http\Request;
 
 /**
@@ -25,7 +26,8 @@ class contentController extends Controller
      */
     public function index()
     {
-        return view('content.index');
+        $contents = content::get();
+        return view('content.index',compact('contents'));
     }
 
     /**
@@ -41,7 +43,14 @@ class contentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        content::create($request->all());
+
+        $contents = content::get();
+        return view('content.index',compact('contents'));
     }
 
     /**
@@ -73,6 +82,9 @@ class contentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $content = content::where("id",$id)->first();
+        $content->delete();
+        
+        return $this->index();
     }
 }
