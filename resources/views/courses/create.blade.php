@@ -32,12 +32,10 @@ and will have to go through an approval(done by a user with the 'approver' Role 
 
                         <form action="{{ route('courses.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="status" value="1">
-                            <input type="hidden" name="is_deleted" value="0">
 
                             <div class="row mb-3">
                                 <div class="col-md-4 start-end">Course Name: </div>
-                                <div class="col"> <input type="text" name="course_name" class="form-control" /> </div>
+                                <div class="col"> <input type="text" name="name" class="form-control" /> </div>
                             </div>
 
                             <div class="text-center mt-4">

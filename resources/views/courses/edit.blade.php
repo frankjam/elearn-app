@@ -13,7 +13,7 @@ and will have to go through an approval(done by a user with the 'approver' Role 
 <div class="content-wrapper">
 
     <div class="pagetitle">
-        <h1>Add A Course</h1>
+        <h1>Edit Course</h1>
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -30,16 +30,24 @@ and will have to go through an approval(done by a user with the 'approver' Role 
                             </div>
                         @endif
 
-                        <form action="{{ route('composites.update', $composite->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('courses.update', $course->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
-                            <input type="hidden" name="status" value="1">
-                            <input type="hidden" name="is_deleted" value="0">
 
                             <div class="row mb-3">
                                 <div class="col-md-4 start-end">Course Name: </div>
-                                <div class="col"> <input type="text" name="course_name" class="form-control"  value="{{  }} /> </div>
+                                <div class="col"> <input type="text" name="course_name" class="form-control"  value="{{ $course->name }}" /> </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-4 start-end">Course status: </div>
+                                <div class="col">
+                                  <select name="status" class="form-control">
+                                    <option value="0">Pending</option>
+                                    <option value="1">Aprroved</option>
+                                  </select>
+                                    </div>
                             </div>
 
                             <div class="text-center mt-4">

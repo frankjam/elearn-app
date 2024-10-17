@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\content;
+use App\Models\courses;
 use Illuminate\Http\Request;
 
 
@@ -30,7 +32,8 @@ class coursesController extends Controller
      */
     public function index()
     {
-        return view('courses.index');
+        $courses = courses::get();
+        return view('courses.index',compact('courses'));
     }
 
     /**
@@ -46,7 +49,14 @@ class coursesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        courses::create($request->all());
+
+        $courses = courses::get();
+        return view('courses.index',compact('courses'));
     }
 
     /**
@@ -54,7 +64,9 @@ class coursesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $contents = content::where("course_id",$id)->get();
+
+        return view('courses.show',compact('contents'));
     }
 
     /**
@@ -62,7 +74,8 @@ class coursesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $course = courses::where("id",$id)->first();
+        return view('courses.edit',compact('course'));
     }
 
     /**
@@ -70,14 +83,31 @@ class coursesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // Validate the request input
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255', // Specify string type and limit the length
+            'status' => 'required', 
+        ]);
+    
+        // Find the course by ID, or fail if not found
+        $course = Courses::findOrFail($id);
+    
+        // Update the course with validated data
+        $course->update($validatedData);
+        
+        // Return the index view 
+        return $this->index(); 
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $course = courses::where("id",$id)->first();
+        $course->delete();
+        
+        return $this->index();
     }
 }
