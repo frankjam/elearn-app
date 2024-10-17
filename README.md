@@ -1,4 +1,8 @@
-To run 
+setup 
+    rename file .env.example to .env 
+    setup database configurations on the .env file 
+        
+To run  
  step 1: ``` php artisan migrate ```
  step 2:  ``` php artisan db:seed ```
  step 3:  ``` php artisan serve ```
