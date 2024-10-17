@@ -6,7 +6,6 @@
                       <p class="text-center small">Enter your personal details to create an account</p>
                   </div>
 
-                  <!-- Frank's Registration Form Code -->
                   <form method="post" action="{{ route('register.perform') }}">
                       @csrf
                       <div class="mb-3">
@@ -36,8 +35,7 @@
                           <button type="submit" class="btn btn-primary">Create Account</button>
                       </div>
                   </form>
-                  <!-- End of Frank's Registration Form Code -->
-
+                 
               </div>
           </div>
           <!-- End of Registration Form -->

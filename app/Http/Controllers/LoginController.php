@@ -67,4 +67,12 @@ class LoginController extends Controller
             return back()->withErrors(['message' => 'Invalid credentials']);
         }
     }
+
+    public function logout(Request $request){
+     
+        JWTAuth::Invalidate();
+       // session_destroy();
+
+        return redirect('login');
+    }
 }
