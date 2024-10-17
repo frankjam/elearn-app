@@ -1,6 +1,7 @@
 @extends('layout.layout')
 @section('content')
-
+<div class="container">
+@can('view-role')
 <h3>Users List</h3>
 <table class="table">
     <thead>
@@ -35,10 +36,12 @@
         @endforeach
     </tbody>
 </table>
+@endcan
 
-<hr>
 
+<div class="row">
 <h3>Courses List</h3>
+
 <table class="table">
     <thead>
         <tr>
@@ -57,5 +60,6 @@
         @endforeach
     </tbody>
 </table>
-
+</div>
+</div>
 @endsection
