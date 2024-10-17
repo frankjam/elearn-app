@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\contentController;
 use App\Http\Controllers\coursesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RegisterController;
@@ -22,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['namespace' => 'App\Http\Controllers'], function () {
+
+    Route::group(['middleware' => ['guest']], function () {
     Route::get('/login', function () {
         return view('auth.login');
     });
@@ -32,12 +35,13 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::name('register.perform')->post('/register', [RegisterController::class, 'register']);
     Route::name('login.perform')->post('/login', [LoginController::class, 'login']);
-
+    });
 
     Route::middleware(['jwt.verify', 'jwt.token.refresh'])->group(function () {
-        Route::get('/', function () {
-            return view('welcome');
-        });
+
+        Route::get('/', [HomeController::class, 'index']);
+        Route::post('/role/asign/{user}', [HomeController::class, 'roleupdate'])->name('role.asign');
+        Route::name('login.logout')->get('/logout', [LoginController::class, 'logout']);
 
         Route::get('/profile', function () {
             return view('auth.profile');
